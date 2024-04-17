@@ -47,7 +47,11 @@
 				},
 				chartArea: {width: '80%', height: '50%'},
 				hAxis: {direction:1, slantedText:true, slantedTextAngle:90 },
+				// viewWindow line needed for minimum limit graph to 0: because there is bug if all values not defined in sheet, so null, response from client ignores null defined values
+				// probably the bug: https://issuetracker.google.com/issues/209024267?pli=1
+				// also for GS; if whole column null, it sets first value to -0.01
 				vAxis: {format: 'short',
+					viewWindow: { min: 0 }, viewWindowMode: "explicit",
 					title: "Significant Wave Height - SWH [m]"},
 				height: "500",
 				width: "100%"
