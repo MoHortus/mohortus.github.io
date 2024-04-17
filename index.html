@@ -27,6 +27,8 @@
 		}
 
 		var data = response.getDataTable();
+		console.log("Printing the data for graph")
+		console.log(data)
 		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 	  
 		var wrapper = new google.visualization.ChartWrapper({
