@@ -1,0 +1,95 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = 'Moon Phases Widget App — ' + SITE_TITLE;
+const description = 'Android widget app showing the current moon phase on your home screen.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			.app-header {
+				text-align: center;
+				padding: 2rem 0;
+			}
+			.app-header a.btn {
+				margin-top: 1rem;
+			}
+			.screenshots {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+				gap: 1.5rem;
+				margin: 2.5rem 0;
+			}
+			.screenshots img {
+				width: 100%;
+				border-radius: 12px;
+				border: 1px solid var(--color-border);
+				box-shadow: var(--shadow-lg);
+			}
+			.faq-item {
+				margin-bottom: 1.5rem;
+				padding-bottom: 1.5rem;
+				border-bottom: 1px solid var(--color-border);
+			}
+			.faq-item:last-child {
+				border-bottom: none;
+			}
+			.faq-item strong {
+				display: block;
+				margin-bottom: 0.4rem;
+				color: var(--color-text-main);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="app-header">
+				<h1>Moon Phases Widget App</h1>
+				<p>App is available for Android on Google Play store.</p>
+				<a
+					href="https://play.google.com/store/apps/developer?id=MoHortus"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="btn"
+				>
+					Get it on Google Play
+				</a>
+			</div>
+
+			<hr style="border-top: 1px solid var(--color-border); margin: 2rem 0;" />
+
+			<h2>Moon Phases Calculation</h2>
+			<p>
+				Moon Phase calculations are based on NASA data.
+				Main purpose of the app is to use as a widget. You can add it to the home screen of your device.
+				Widget shows the current moon phase.
+			</p>
+
+			<div class="screenshots">
+				<img src="/images/app-moon-image2.jpg" alt="Moon Phases app screenshot" />
+				<img src="/images/app-moon-home.jpg" alt="Moon Phases app home screen" />
+				<img src="/images/app-moon-day.jpg" alt="Moon Phases app - Phase Day view" />
+				<img src="/images/app-moon-list.jpg" alt="Moon Phases app - Phase List view" />
+			</div>
+
+			<h2>FAQ</h2>
+			<div class="faq-item">
+				<strong>Issue: Widget is not refreshing automatically.</strong>
+				It might happen (after the app update) that widgets do not refresh automatically anymore.
+				In this case please uninstall and install the application.
+			</div>
+
+			<p style="margin-top: 2rem;">
+				Moon phase data source: <a href="https://svs.gsfc.nasa.gov/4310#section_credits" target="_blank" rel="noopener noreferrer">NASA Scientific Visualization Studio</a>
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

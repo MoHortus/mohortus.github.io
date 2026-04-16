@@ -1,0 +1,37 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = 'Contact — ' + SITE_TITLE;
+const description = 'Get in touch with MoHortus.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			.contact-section {
+				max-width: 480px;
+				padding: 3rem 0;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="contact-section">
+				<h1>Contact</h1>
+				<p>Feel free to get in touch via email:</p>
+				<p>
+					<a href="mailto:mohortus@gmail.com" style="font-size: 1.2rem; font-weight: 600;">
+						mohortus@gmail.com
+					</a>
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

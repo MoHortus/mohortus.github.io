@@ -1,0 +1,140 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = 'Research — ' + SITE_TITLE;
+const description = 'Wave height forecasting and measurement in The Gulf of Trieste.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawGID);
+
+			function drawGID() {
+				var queryString = encodeURIComponent('SELECT D, H, I, J LIMIT 30');
+				var query = new google.visualization.Query(
+					'https://docs.google.com/spreadsheets/d/1Y10YJuKOOcB7C5TDYmvRI-JfHOIbKp64K1ZK9rFwIT8/gviz/tq?gid=0&headers=1&tq=' + queryString);
+				query.send(handleQueryResponse);
+			}
+
+			function handleQueryResponse(response) {
+				if (response.isError()) {
+					console.log('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+					return;
+				}
+				var data = response.getDataTable();
+				var wrapper = new google.visualization.ChartWrapper({
+					chartType: 'ColumnChart',
+					dataTable: data,
+					containerId: 'chart_div',
+					options: {
+						legend: { position: 'top', alignment: 'start' },
+						title: 'Significant Wave Height for Today - buoy Vida location',
+						titleTextStyle: {
+							fontSize: 20,
+							bold: true
+						},
+						chartArea: {width: '80%', height: '50%'},
+						hAxis: {direction: 1, slantedText: true, slantedTextAngle: 90},
+						vAxis: {
+							format: 'short',
+							viewWindow: { min: 0 },
+							viewWindowMode: 'explicit',
+							title: 'Significant Wave Height - SWH [m]'
+						},
+						height: '500',
+						width: '100%'
+					}
+				});
+				wrapper.draw();
+			}
+		</script>
+		<style>
+			#chart_div {
+				width: 100%;
+				margin: 2rem 0;
+				min-height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Research</h1>
+
+			<h2>Wave height in The Gulf of Trieste — forecast and measurement</h2>
+
+			<p>
+				There are 3 buoys [1] in the Gulf of Trieste operated by Slovenian Environment Agency (ARSO)
+				which make wave height measurements. Buoy Vida is taking measurements from 2006 [2].
+				There are multiple numerical models which predict wave climate. One of those is WAM model
+				from National and Kapodistrian University of Athens [3]. Wave model predominately underestimates
+				high sea waves in the Gulf of Trieste. Therefore, adjustment equation corrects WAM model data [4].
+			</p>
+
+			<p>Graph shows following data for the current day in the local time on the coordinates of buoy Vida:</p>
+			<ul>
+				<li>WAM numerical model wave height</li>
+				<li>WAM numerical model wave height adjusted</li>
+				<li>Buoy Vida wave height measurement</li>
+			</ul>
+
+			<div id="chart_div"></div>
+
+			<p>
+				<strong>Note:</strong> Currently measurement from buoy Vida is not available because of maintenance [2].
+				Therefore, graph temporary shows data for buoy Zarja instead.
+			</p>
+
+			<p>
+				Nowadays weather forecast for the next few days is quite reliable. However, reliability in unstable
+				weather conditions is lower. Wave height prediction is based on weather forecast. Therefore, numerical
+				models for wave forecast are even less reliable. As duration of continuous measurements with buoys is
+				relatively short in the Gulf of Trieste (from 2006), wave data can be extended with results of numerical
+				models. This is beneficial for calculation of design wave height.
+			</p>
+
+			<p>
+				It was found out that WAM numerical model for wave forecast predominately underestimates high seas waves.
+				Therefore, equation to adjust numerical wave height from typical wave directions with high seas was
+				defined for the Gulf of Trieste [4].
+			</p>
+
+			<h3>References</h3>
+			<ol>
+				<li>
+					<a href="http://rte.arso.gov.si/vode/poro%C4%8Dila%20in%20publikacije/Program%20hidrolo%C5%A1kega%20monitoringa%20povr%C5%A1inskih%20voda%202016-2020.pdf"
+					   target="_blank" rel="noopener noreferrer">
+						ARSO — Hydrological monitoring programme for surface waters 2016–2020 (PDF)
+					</a>
+				</li>
+				<li>
+					<a href="https://www.nib.si/mbp/sl/oceanografski-podatki/buoy-2/live-data-2"
+					   target="_blank" rel="noopener noreferrer">
+						NIB — Buoy Vida live data
+					</a>
+				</li>
+				<li>
+					<a href="https://forecast.uoa.gr/en/group"
+					   target="_blank" rel="noopener noreferrer">
+						National and Kapodistrian University of Athens — Forecast group
+					</a>
+				</li>
+				<li>
+					<a href="https://repozitorij.uni-lj.si/IzpisGradiva.php?id=32512"
+					   target="_blank" rel="noopener noreferrer">
+						University of Ljubljana repository — Wave height adjustment equation
+					</a>
+				</li>
+			</ol>
+		</main>
+		<Footer />
+	</body>
+</html>
