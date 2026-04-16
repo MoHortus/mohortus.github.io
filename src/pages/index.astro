@@ -60,6 +60,12 @@ import { url } from '../utils/paths';
 				height: 200px;
 				object-fit: cover;
 			}
+			.card img.align-top {
+				object-position: top;
+			}
+			.card img.align-bottom {
+				object-position: bottom;
+			}
 			.card-body {
 				padding: 1.5rem;
 			}
@@ -101,7 +107,7 @@ import { url } from '../utils/paths';
 
 			<div class="cards">
 				<a href={url('/moon-phases')} class="card">
-					<img src="/images/app-moon-image2.jpg" alt="Moon Phases Widget App screenshot" />
+					<img src="/images/app-moon-image2.jpg" alt="Moon Phases Widget App screenshot" class="align-bottom" />
 					<div class="card-body">
 						<h2>Moon Phases Widget App</h2>
 						<p>Android widget app showing the current moon phase on your home screen. Available on Google Play.</p>
@@ -110,7 +116,8 @@ import { url } from '../utils/paths';
 				</a>
 
 				<a href={url('/research')} class="card">
-					<div class="card-body" style="padding: 2rem;">
+					<img src="/images/graph.jpg" alt="Wave height research graph" class="align-top" />
+					<div class="card-body">
 						<h2>Research — Wave Height</h2>
 						<p>Wave height forecasting and measurement in The Gulf of Trieste. Comparing WAM numerical model data with buoy measurements.</p>
 						<span class="card-link">Learn more →</span>

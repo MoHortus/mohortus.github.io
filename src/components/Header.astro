@@ -6,7 +6,7 @@ import { url } from '../utils/paths';
 
 <header>
 	<nav>
-		<h2><a href={url('/')}>{SITE_TITLE}</a></h2>
+		<h2><a href={url('/')}><img src="/images/logo.jpg" alt="MoHortus logo" class="site-logo" />{SITE_TITLE}</a></h2>
         
 		<div class="internal-links">
 			<HeaderLink href={url('/')}>Home</HeaderLink>
@@ -108,7 +108,14 @@ import { url } from '../utils/paths';
 		text-decoration: none;
 		color: var(--color-text-main);
         border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
 	}
+    .site-logo {
+        height: 1em;
+        width: auto;
+    }
 
 	.internal-links {
         display: flex;

@@ -15,7 +15,19 @@ const description = 'Android widget app showing the current moon phase on your h
 		<style>
 			.app-header {
 				text-align: center;
-				padding: 2rem 0;
+				padding: 4rem 2rem;
+				margin: 0 calc(-1 * var(--content-padding, 1.5rem));
+				background-image:
+					linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)),
+					url('/images/app-moon-image2.jpg');
+				background-size: cover;
+				background-position: center bottom;
+				border-radius: 12px;
+			}
+			:global(html[data-theme="dark"]) .app-header {
+				background-image:
+					linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+					url('/images/app-moon-image2.jpg');
 			}
 			.app-header a.btn {
 				margin-top: 1rem;
@@ -73,7 +85,6 @@ const description = 'Android widget app showing the current moon phase on your h
 			</p>
 
 			<div class="screenshots">
-				<img src="/images/app-moon-image2.jpg" alt="Moon Phases app screenshot" />
 				<img src="/images/app-moon-home.jpg" alt="Moon Phases app home screen" />
 				<img src="/images/app-moon-day.jpg" alt="Moon Phases app - Phase Day view" />
 				<img src="/images/app-moon-list.jpg" alt="Moon Phases app - Phase List view" />
